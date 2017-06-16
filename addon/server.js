@@ -1,3 +1,4 @@
+import { isArray, pick, keys } from 'lodash';
 import { pluralize } from './utils/inflector';
 import Pretender from 'pretender';
 import Db from './db';
@@ -5,8 +6,6 @@ import Schema from './orm/schema';
 import ActiveModelSerializer from 'ember-cli-mirage/serializers/active-model-serializer';
 import SerializerRegistry from './serializer-registry';
 import RouteHandler from './route-handler';
-
-const { isArray } = _;
 
 export default class Server {
 
@@ -103,7 +102,7 @@ export default class Server {
   loadFixtures(...args) {
     let fixtures = this.options.fixtures;
     if (args.length) {
-      fixtures = _.pick(fixtures, ...args);
+      fixtures = pick(fixtures, ...args);
     }
 
     this.db.loadData(fixtures);
@@ -118,7 +117,7 @@ export default class Server {
     this._factoryMap = factoryMap;
 
     // Create a collection for each factory
-    _.keys(factoryMap).forEach(function(type) {
+    keys(factoryMap).forEach(function(type) {
       _this.db.createCollection(pluralize(type));
     });
   }
@@ -187,7 +186,7 @@ export default class Server {
   _hasModulesOfType(modules, type) {
     let modulesOfType = modules[type] || {};
 
-    return _.keys(modulesOfType).length > 0;
+    return keys(modulesOfType).length > 0;
   }
 
   /*

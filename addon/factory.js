@@ -1,9 +1,11 @@
+import { keys, assign } from 'lodash';
+
 var Factory = function() {
   this.build = function(sequence) {
     var object = {};
     var attrs = this.attrs || {};
 
-    _.keys(attrs).forEach(function(key) {
+    keys(attrs).forEach(function(key) {
       var type = typeof attrs[key];
 
       if (type === 'function') {
@@ -19,7 +21,7 @@ var Factory = function() {
 
 Factory.extend = function(attrs) {
   // Merge the new attributes with existing ones. If conflict, new ones win.
-  var newAttrs = _.assign({}, this.attrs, attrs);
+  var newAttrs = assign({}, this.attrs, attrs);
 
   var Subclass = function() {
     this.attrs = newAttrs;

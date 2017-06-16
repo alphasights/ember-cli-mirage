@@ -1,6 +1,6 @@
 import { singularize, capitalize, camelize } from 'ember-cli-mirage/utils/inflector';
+import { isArray } from 'lodash';
 
-const { isArray } = _;
 const allDigitsRegex = /^\d+$/;
 
 export default class BaseShorthandRouteHandler {

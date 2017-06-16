@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { isArray, keys } from 'lodash';
 import Response from './response';
 import FunctionHandler from './route-handlers/function';
 import ObjectHandler from './route-handlers/object';
@@ -7,7 +8,6 @@ import PostShorthandHandler from './route-handlers/shorthands/post';
 import PutShorthandHandler from './route-handlers/shorthands/put';
 import DeleteShorthandHandler from './route-handlers/shorthands/delete';
 
-const { isArray, keys } = _;
 const { isBlank, typeOf } = Ember;
 
 export default class RouteHandler {

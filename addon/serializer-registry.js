@@ -1,9 +1,8 @@
+import { assign, isArray } from 'lodash';
 import Model from 'ember-cli-mirage/orm/model';
 import Collection from 'ember-cli-mirage/orm/collection';
 import ActiveModelSerializer from 'ember-cli-mirage/serializers/active-model-serializer';
 import { pluralize } from './utils/inflector';
-
-const { isArray, assign } = _;
 
 export default class SerializerRegistry {
 
@@ -143,7 +142,7 @@ export default class SerializerRegistry {
     this._augmentAlreadySerialized(model);
     let relatedAttrs = serializeRelationships ? this._attrsForRelationships(model) : {};
 
-    return _.assign(attrs, relatedAttrs);
+    return assign(attrs, relatedAttrs);
   }
 
   _attrsForModel(model, removeForeignKeys, embedRelatedIds) {

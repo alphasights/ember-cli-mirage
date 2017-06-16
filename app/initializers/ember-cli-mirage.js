@@ -1,3 +1,4 @@
+import { assign } from 'lodash';
 import readModules from 'ember-cli-mirage/utils/read-modules';
 import ENV from '../config/environment';
 import baseConfig, { testConfig } from '../mirage/config';
@@ -14,7 +15,7 @@ export default {
 
     if (_shouldUseMirage(environment, ENV['ember-cli-mirage'])) {
       let modules = readModules(ENV.modulePrefix);
-      let options = _.assign(modules, {environment, baseConfig, testConfig})
+      let options = assign(modules, {environment, baseConfig, testConfig})
 
       new Server(options);
     }

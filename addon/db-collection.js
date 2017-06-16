@@ -1,3 +1,5 @@
+import { isArray, assign, isEqual } from 'lodash';
+
 function stringify(data) {
   return JSON.parse(JSON.stringify(data));
 }
@@ -28,7 +30,7 @@ class DbCollection {
     let records = this._records;
     let returnData;
 
-    if (!_.isArray(copy)) {
+    if (!isArray(copy)) {
       let attrs = copy;
       if (attrs.id === undefined || attrs.id === null) {
         attrs.id = records.length + 1;
@@ -54,7 +56,7 @@ class DbCollection {
   }
 
   find(ids) {
-    if (_.isArray(ids)) {
+    if (isArray(ids)) {
       let records = this._findRecords(ids)
         .filter(r => r !== undefined);
 
@@ -83,7 +85,7 @@ class DbCollection {
     if (record) {
       return record;
     } else {
-      let mergedAttributes = _.assign(attributesForNew, query);
+      let mergedAttributes = assign(attributesForNew, query);
       let createdRecord = this.insert(mergedAttributes);
 
       return createdRecord;
@@ -97,13 +99,13 @@ class DbCollection {
       attrs = target;
       let changedRecords = [];
       this._records.forEach(function(record) {
-        let oldRecord = _.assign({}, record);
+        let oldRecord = assign({}, record);
 
         for (let attr in attrs) {
           record[attr] = attrs[attr];
         }
 
-        if (!_.isEqual(oldRecord, record)) {
+        if (!isEqual(oldRecord, record)) {
           changedRecords.push(record);
         }
       });
@@ -120,7 +122,7 @@ class DbCollection {
 
       return record;
 
-    } else if (_.isArray(target)) {
+    } else if (isArray(target)) {
       let ids = target;
       records = this._findRecords(ids);
 
@@ -157,7 +159,7 @@ class DbCollection {
       let index = this._records.indexOf(record);
       this._records.splice(index, 1);
 
-    } else if (_.isArray(target)) {
+    } else if (isArray(target)) {
       records = this._findRecords(target);
       records.forEach(record =>  {
         let index = this._records.indexOf(record);

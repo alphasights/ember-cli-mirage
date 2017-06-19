@@ -12,6 +12,5 @@
     "ember-qunit": "0.4.9",
     "ember-qunit-notifications": "0.0.7",
     "qunit": "~1.18.0",
-    "Faker": "~3.0.0"
   }
 }

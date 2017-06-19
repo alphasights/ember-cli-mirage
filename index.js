@@ -16,7 +16,7 @@ module.exports = {
         type: 'vendor',
         exports: { 'pretender': ['default'] }
       });
-      app.import(app.bowerDirectory + '/Faker/build/build/faker.js');
+      app.import(path.join(path.dirname(require.resolve('faker')), '/build/build/faker.js'));
     }
   },
 

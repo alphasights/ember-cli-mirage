@@ -11,9 +11,7 @@ module.exports = {
     this.addonConfig = this.app.project.config(app.env)['ember-cli-mirage'];
 
     if (this._shouldIncludeFiles()) {
-      app.import(app.bowerDirectory + '/FakeXMLHttpRequest/fake_xml_http_request.js');
-      app.import(app.bowerDirectory + '/route-recognizer/dist/route-recognizer.js');
-      app.import(app.bowerDirectory + '/pretender/pretender.js');
+      app.import(require.resolve('pretender'));
       app.import('vendor/ember-cli-mirage/pretender-shim.js', {
         type: 'vendor',
         exports: { 'pretender': ['default'] }
